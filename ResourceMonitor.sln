@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResourceMonitor.Application", "src\ResourceMonitor.Application\ResourceMonitor.Application.csproj", "{FA4BCB56-E13F-4EA6-909D-304B1B07FF19}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResourceMonitor.Core", "src\ResourceMonitor.Core\ResourceMonitor.Core.csproj", "{712B4839-5C49-406B-8039-998869D78271}"
 EndProject
 Global
@@ -17,6 +19,18 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA4BCB56-E13F-4EA6-909D-304B1B07FF19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA4BCB56-E13F-4EA6-909D-304B1B07FF19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA4BCB56-E13F-4EA6-909D-304B1B07FF19}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FA4BCB56-E13F-4EA6-909D-304B1B07FF19}.Debug|x64.Build.0 = Debug|Any CPU
+		{FA4BCB56-E13F-4EA6-909D-304B1B07FF19}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FA4BCB56-E13F-4EA6-909D-304B1B07FF19}.Debug|x86.Build.0 = Debug|Any CPU
+		{FA4BCB56-E13F-4EA6-909D-304B1B07FF19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA4BCB56-E13F-4EA6-909D-304B1B07FF19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA4BCB56-E13F-4EA6-909D-304B1B07FF19}.Release|x64.ActiveCfg = Release|Any CPU
+		{FA4BCB56-E13F-4EA6-909D-304B1B07FF19}.Release|x64.Build.0 = Release|Any CPU
+		{FA4BCB56-E13F-4EA6-909D-304B1B07FF19}.Release|x86.ActiveCfg = Release|Any CPU
+		{FA4BCB56-E13F-4EA6-909D-304B1B07FF19}.Release|x86.Build.0 = Release|Any CPU
 		{712B4839-5C49-406B-8039-998869D78271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{712B4839-5C49-406B-8039-998869D78271}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{712B4839-5C49-406B-8039-998869D78271}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -34,6 +48,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{FA4BCB56-E13F-4EA6-909D-304B1B07FF19} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{712B4839-5C49-406B-8039-998869D78271} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 	EndGlobalSection
 EndGlobal

@@ -73,5 +73,5 @@ public abstract class PlatformBase : IPlatformProvider
     public virtual TimeSpan ReadUptime() => TimeSpan.FromMilliseconds(Environment.TickCount64);
     public virtual void Dispose() { GC.SuppressFinalize(this); }
     protected static SystemInfo Info(string model, string vendor, int? physical, int logical, double? mhz) => new(RuntimeInformation.OSDescription, RuntimeInformation.OSArchitecture.ToString(), Environment.MachineName, model, vendor, physical, logical, mhz);
-    public static IPlatformProvider Create() => OperatingSystem.IsLinux() ? new LinuxProvider() : throw new PlatformNotSupportedException("Операційна система не підтримується");
+    public static IPlatformProvider Create() => OperatingSystem.IsLinux() ? new LinuxProvider() : OperatingSystem.IsWindows() ? new WindowsProvider() : throw new PlatformNotSupportedException("Операційна система не підтримується");
 }

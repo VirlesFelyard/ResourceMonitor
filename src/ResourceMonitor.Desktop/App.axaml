@@ -1,0 +1,25 @@
+<Application xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="ResourceMonitor.Desktop.App" RequestedThemeVariant="Light">
+  <Application.Resources><ResourceDictionary>
+    <StreamGeometry x:Key="OsIconGeometry">M2,2 H22 V16 H2 Z M8,21 H16 M12,16 V21</StreamGeometry>
+    <StreamGeometry x:Key="CpuIconGeometry">M4,4 H20 V20 H4 Z M8,8 H16 V16 H8 Z M8,0 V4 M16,0 V4 M8,20 V24 M16,20 V24 M0,8 H4 M0,16 H4 M20,8 H24 M20,16 H24</StreamGeometry>
+    <StreamGeometry x:Key="MemoryIconGeometry">M1,5 H23 V17 H1 Z M5,8 H9 V13 H5 Z M14,8 H18 V13 H14 Z M4,17 V21 M8,17 V21 M12,17 V21 M16,17 V21 M20,17 V21</StreamGeometry>
+    <StreamGeometry x:Key="DiskIconGeometry">M4,3 H20 L23,13 V20 H1 V13 Z M1,13 H23 M5,17 H7 M10,17 H12</StreamGeometry>
+    <StreamGeometry x:Key="NetworkIconGeometry">M9,1 H15 V7 H9 Z M1,17 H7 V23 H1 Z M17,17 H23 V23 H17 Z M12,7 V12 M4,17 V12 H20 V17</StreamGeometry>
+    <ResourceDictionary.ThemeDictionaries>
+    <ResourceDictionary x:Key="Light"><SolidColorBrush x:Key="PageBackground">#F4F6FA</SolidColorBrush><SolidColorBrush x:Key="CardBackground">#FFFFFF</SolidColorBrush><SolidColorBrush x:Key="CardBorder">#DFE4ED</SolidColorBrush></ResourceDictionary>
+    <ResourceDictionary x:Key="Dark"><SolidColorBrush x:Key="PageBackground">#151A23</SolidColorBrush><SolidColorBrush x:Key="CardBackground">#202735</SolidColorBrush><SolidColorBrush x:Key="CardBorder">#343E50</SolidColorBrush></ResourceDictionary>
+  </ResourceDictionary.ThemeDictionaries></ResourceDictionary></Application.Resources>
+  <Application.Styles>
+    <FluentTheme />
+    <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
+    <Style Selector="Window"><Setter Property="FontFamily" Value="Inter" /><Setter Property="FontSize" Value="14" /></Style>
+    <Style Selector="Border.card"><Setter Property="Background" Value="{DynamicResource CardBackground}" /><Setter Property="CornerRadius" Value="12" /><Setter Property="Padding" Value="22" /><Setter Property="Margin" Value="8" /><Setter Property="BorderBrush" Value="{DynamicResource CardBorder}" /><Setter Property="BorderThickness" Value="1" /></Style>
+    <Style Selector="TextBlock.heading"><Setter Property="FontSize" Value="18" /><Setter Property="FontWeight" Value="SemiBold" /></Style>
+    <Style Selector="TextBlock.muted"><Setter Property="Opacity" Value="0.65" /><Setter Property="FontSize" Value="12" /></Style>
+    <Style Selector="TextBlock.value"><Setter Property="FontSize" Value="23" /><Setter Property="FontWeight" Value="SemiBold" /></Style>
+    <Style Selector="Button"><Setter Property="Padding" Value="16,9" /><Setter Property="CornerRadius" Value="7" /></Style>
+    <Style Selector="TabControl /template/ TabStrip"><Setter Property="HorizontalAlignment" Value="Center" /></Style>
+    <Style Selector="TabItem"><Setter Property="FontSize" Value="16" /><Setter Property="FontWeight" Value="Medium" /><Setter Property="Padding" Value="22,16" /></Style>
+    <Style Selector="TabItem:selected"><Setter Property="Foreground" Value="#4779EC" /></Style>
+  </Application.Styles>
+</Application>

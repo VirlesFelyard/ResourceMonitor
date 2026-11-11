@@ -1,0 +1,67 @@
+<Window xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia" xmlns:views="using:ResourceMonitor.Desktop.Views" x:Class="ResourceMonitor.Desktop.MainWindow" Title="ResourceMonitor — монітор системних ресурсів" Width="1200" Height="900" MinWidth="650" MinHeight="600" Background="{DynamicResource PageBackground}">
+<Grid>
+  <TabControl Grid.Row="0" Margin="14,12,14,0" HorizontalContentAlignment="Stretch"><TabControl.ItemsPanel><ItemsPanelTemplate><WrapPanel HorizontalAlignment="Center" /></ItemsPanelTemplate></TabControl.ItemsPanel>
+    <TabItem Header="Графіки"><ScrollViewer HorizontalScrollBarVisibility="Disabled"><StackPanel>
+      <TextBlock Classes="heading" Margin="18,12,18,6" Text="Огляд ресурсів"/>
+      <WrapPanel HorizontalAlignment="Center">
+        <Border Classes="card" Width="550" Height="350" Padding="14">
+          <Grid RowDefinitions="Auto,Auto,*,Auto,Auto">
+            <StackPanel Orientation="Horizontal" Spacing="10"><Viewbox Width="16" Height="16" VerticalAlignment="Center"><Path Width="26" Height="26" Stroke="{DynamicResource SystemControlForegroundBaseHighBrush}" Opacity="0.7" StrokeThickness="1.5" Data="{StaticResource CpuIconGeometry}"/></Viewbox><TextBlock Classes="heading" Text="Процесор"/></StackPanel>
+            <TextBlock Grid.Row="1" Margin="0,8,0,0" Classes="value" Text="{Binding Cpu}"/>
+            <lvc:CartesianChart Grid.Row="2" Margin="0,6,0,2" DrawMargin="{Binding Charts.PlotMargin}" ZoomMode="None" Series="{Binding Charts.CpuSeries}" XAxes="{Binding Charts.CpuX}" YAxes="{Binding Charts.CpuY}" LegendPosition="Hidden" AnimationsSpeed="0:0:0" TooltipPosition="Hidden"/>
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20" Margin="0,2,0,6"><StackPanel Orientation="Horizontal" Spacing="6"><TextBlock Foreground="#4779EC" Text="━"/><TextBlock Text="Загальне" FontSize="11"/></StackPanel></StackPanel>
+            <TextBlock Grid.Row="4" Classes="muted" Text="Навантаження відносно всіх логічних процесорів" TextWrapping="Wrap"/>
+          </Grid>
+        </Border>
+        <Border Classes="card" Width="550" Height="350" Padding="14">
+          <Grid RowDefinitions="Auto,Auto,*,Auto,Auto">
+            <StackPanel Orientation="Horizontal" Spacing="10"><Viewbox Width="16" Height="16" VerticalAlignment="Center"><Path Width="26" Height="26" Stroke="{DynamicResource SystemControlForegroundBaseHighBrush}" Opacity="0.7" StrokeThickness="1.5" Data="{StaticResource MemoryIconGeometry}"/></Viewbox><TextBlock Classes="heading" Text="Оперативна пам’ять"/></StackPanel>
+            <TextBlock Grid.Row="1" Margin="0,8,0,0" Classes="value" Text="{Binding Ram}"/>
+            <lvc:CartesianChart Grid.Row="2" Margin="0,6,0,2" DrawMargin="{Binding Charts.PlotMargin}" ZoomMode="None" Series="{Binding Charts.RamSeries}" XAxes="{Binding Charts.RamX}" YAxes="{Binding Charts.RamY}" LegendPosition="Hidden" AnimationsSpeed="0:0:0" TooltipPosition="Hidden"/>
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20" Margin="0,2,0,6"><StackPanel Orientation="Horizontal" Spacing="6"><TextBlock Foreground="#8D68D9" Text="━"/><TextBlock Text="Використано" FontSize="11"/></StackPanel></StackPanel>
+            <TextBlock Grid.Row="4" Classes="muted" Text="{Binding MemoryDetails}" TextWrapping="Wrap"/>
+          </Grid>
+        </Border>
+        <Border Classes="card" Width="550" Height="350" Padding="14">
+          <Grid RowDefinitions="Auto,Auto,*,Auto,Auto">
+            <StackPanel Orientation="Horizontal" Spacing="10"><Viewbox Width="16" Height="16" VerticalAlignment="Center"><Path Width="26" Height="26" Stroke="{DynamicResource SystemControlForegroundBaseHighBrush}" Opacity="0.7" StrokeThickness="1.5" Data="{StaticResource DiskIconGeometry}"/></Viewbox><TextBlock Classes="heading" Text="Дисковий обмін"/></StackPanel>
+            <TextBlock Grid.Row="1" Margin="0,8,0,0" Classes="muted" Text="{Binding Disk}"/>
+            <lvc:CartesianChart Grid.Row="2" Margin="0,6,0,2" DrawMargin="{Binding Charts.PlotMargin}" ZoomMode="None" Series="{Binding Charts.DiskSeries}" XAxes="{Binding Charts.DiskX}" YAxes="{Binding Charts.DiskY}" LegendPosition="Hidden" AnimationsSpeed="0:0:0" TooltipPosition="Hidden"/>
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20" Margin="0,2,0,6"><StackPanel Orientation="Horizontal" Spacing="6"><TextBlock Foreground="#429C86" Text="━"/><TextBlock Text="Читання" FontSize="11"/></StackPanel><StackPanel Orientation="Horizontal" Spacing="6"><TextBlock Foreground="#DB9A42" Text="━"/><TextBlock Text="Запис" FontSize="11"/></StackPanel></StackPanel>
+            <TextBlock Grid.Row="4" Classes="muted" Text="{Binding DiskTotals}" TextWrapping="Wrap"/>
+          </Grid>
+        </Border>
+        <Border Classes="card" Width="550" Height="350" Padding="14">
+          <Grid RowDefinitions="Auto,Auto,*,Auto,Auto">
+            <StackPanel Orientation="Horizontal" Spacing="10"><Viewbox Width="16" Height="16" VerticalAlignment="Center"><Path Width="26" Height="26" Stroke="{DynamicResource SystemControlForegroundBaseHighBrush}" Opacity="0.7" StrokeThickness="1.5" Data="{StaticResource NetworkIconGeometry}"/></Viewbox><TextBlock Classes="heading" Text="Мережевий трафік"/></StackPanel>
+            <TextBlock Grid.Row="1" Margin="0,8,0,0" Classes="muted" Text="{Binding Network}"/>
+            <lvc:CartesianChart Grid.Row="2" Margin="0,6,0,2" DrawMargin="{Binding Charts.PlotMargin}" ZoomMode="None" Series="{Binding Charts.NetworkSeries}" XAxes="{Binding Charts.NetworkX}" YAxes="{Binding Charts.NetworkY}" LegendPosition="Hidden" AnimationsSpeed="0:0:0" TooltipPosition="Hidden"/>
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="20" Margin="0,2,0,6"><StackPanel Orientation="Horizontal" Spacing="6"><TextBlock Foreground="#4779EC" Text="━"/><TextBlock Text="Отримано" FontSize="11"/></StackPanel><StackPanel Orientation="Horizontal" Spacing="6"><TextBlock Foreground="#C671A1" Text="━"/><TextBlock Text="Передано" FontSize="11"/></StackPanel></StackPanel>
+            <TextBlock Grid.Row="4" Classes="muted" Text="{Binding NetworkTotals}" TextWrapping="Wrap"/>
+          </Grid>
+        </Border>
+      </WrapPanel>
+      <Expander Header="Лінії логічних процесорів" Margin="18,8,18,20"><ItemsControl ItemsSource="{Binding Charts.CoreLines}"><ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel><ItemsControl.ItemTemplate><DataTemplate><CheckBox Content="{Binding Name}" Foreground="{Binding Color}" IsChecked="{Binding Visible}" Margin="8,2"/></DataTemplate></ItemsControl.ItemTemplate></ItemsControl></Expander>
+    </StackPanel></ScrollViewer></TabItem>
+    <TabItem Header="Система"><views:SystemView DataContext="{Binding System}"/></TabItem>
+    <TabItem Header="Процеси"><Grid RowDefinitions="Auto,*,Auto" Margin="18,22">
+      <WrapPanel Margin="0,0,0,16"><TextBox Width="280" Watermark="Пошук за назвою процесу" Text="{Binding Processes.Search}" Margin="0,0,16,0"/><ComboBox Width="120" ItemsSource="{Binding Processes.SortOptions}" SelectedIndex="{Binding Processes.SortIndex}"/><CheckBox Content="За спаданням" IsChecked="{Binding Processes.Descending}" Margin="16,0"/></WrapPanel>
+      <DataGrid Grid.Row="1" ItemsSource="{Binding Processes.Rows}" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" GridLinesVisibility="Horizontal" RowHeight="38" HeadersVisibility="Column" BorderThickness="1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+        <DataGrid.Columns><DataGridTextColumn Header="PID" Binding="{Binding Pid}" Width="75"/><DataGridTextColumn Header="Назва" Binding="{Binding Name}" Width="*"/><DataGridTextColumn Header="CPU" Binding="{Binding Cpu}" Width="155"/><DataGridTextColumn Header="RAM" Binding="{Binding Ram}" Width="105"/><DataGridTextColumn Header="Читання I/O" Binding="{Binding Read}" Width="155"/><DataGridTextColumn Header="Запис I/O" Binding="{Binding Write}" Width="155"/><DataGridTextColumn Header="Запущено" Binding="{Binding Started}" Width="145"/></DataGrid.Columns>
+      </DataGrid><TextBlock Grid.Row="2" Classes="muted" Margin="0,12,0,0" Text="{Binding Processes.Count}"/>
+    </Grid></TabItem>
+    <TabItem Header="Журнал"><Grid RowDefinitions="Auto,*" Margin="18,22">
+      <StackPanel Spacing="8" Margin="0,0,0,16"><TextBlock Classes="heading" Text="Зміни навантаження"/><TextBlock Classes="muted" Text="{Binding EventSummary}"/></StackPanel>
+      <ListBox Grid.Row="1" ItemsSource="{Binding Events}" Background="Transparent"><ListBox.Styles><Style Selector="ListBoxItem"><Setter Property="HorizontalContentAlignment" Value="Stretch"/></Style></ListBox.Styles><ListBox.ItemTemplate><DataTemplate>
+        <Border Classes="card"><Grid ColumnDefinitions="5,*"><Border Background="{Binding Color}" CornerRadius="2"/><StackPanel Grid.Column="1" Margin="16,0,0,0" Spacing="8"><StackPanel Orientation="Horizontal" Spacing="16"><TextBlock Text="{Binding Kind}" FontWeight="SemiBold"/><TextBlock Text="{Binding Time}"/><TextBlock Classes="muted" Text="{Binding Severity}"/></StackPanel><TextBlock Text="{Binding Description}" TextWrapping="Wrap"/></StackPanel></Grid></Border>
+      </DataTemplate></ListBox.ItemTemplate></ListBox>
+    </Grid></TabItem>
+    <TabItem Header="Налаштування"><ScrollViewer><StackPanel Margin="24" MaxWidth="540" HorizontalAlignment="Center" Spacing="18" DataContext="{Binding Settings}">
+      <TextBlock Classes="heading" Text="Моніторинг та сповіщення"/><CheckBox Content="Темна тема" IsChecked="{Binding DarkTheme}"/>
+      <Grid ColumnDefinitions="360,180" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+        <TextBlock Text="Інтервал опитування, с" VerticalAlignment="Center"/><ComboBox Grid.Column="1" ItemsSource="{Binding Intervals}" SelectedItem="{Binding IntervalSeconds}" HorizontalAlignment="Stretch" Margin="0,6"/>
+<TextBlock Grid.Row="1" Text="Приріст CPU, відсоткових пунктів" VerticalAlignment="Center"/><NumericUpDown Grid.Row="1" Grid.Column="1" Value="{Binding CpuIncrease}" Minimum="1" Maximum="100" Increment="1" FormatString="0" Margin="0,6"/><TextBlock Grid.Row="2" Text="Мінімальне кінцеве CPU, %" VerticalAlignment="Center"/><NumericUpDown Grid.Row="2" Grid.Column="1" Value="{Binding CpuMinimum}" Minimum="0" Maximum="100" Increment="1" FormatString="0" Margin="0,6"/><TextBlock Grid.Row="3" Text="Приріст RAM, MiB" VerticalAlignment="Center"/><NumericUpDown Grid.Row="3" Grid.Column="1" Value="{Binding RamIncreaseMiB}" Minimum="1" Maximum="1048576" Increment="1" FormatString="0" Margin="0,6"/><TextBlock Grid.Row="4" Text="Вікно аналізу CPU, с" VerticalAlignment="Center"/><NumericUpDown Grid.Row="4" Grid.Column="1" Value="{Binding CpuWindowSeconds}" Minimum="1" Maximum="3600" Increment="1" FormatString="0" Margin="0,6"/><TextBlock Grid.Row="5" Text="Вікно аналізу RAM, с" VerticalAlignment="Center"/><NumericUpDown Grid.Row="5" Grid.Column="1" Value="{Binding RamWindowSeconds}" Minimum="1" Maximum="3600" Increment="1" FormatString="0" Margin="0,6"/><TextBlock Grid.Row="6" Text="Блокування повторних подій, с" VerticalAlignment="Center"/><NumericUpDown Grid.Row="6" Grid.Column="1" Value="{Binding CooldownSeconds}" Minimum="0" Maximum="86400" Increment="1" FormatString="0" Margin="0,6"/>
+      </Grid><StackPanel Orientation="Horizontal" Spacing="12"><Button Content="Застосувати" Command="{Binding ApplyCommand}"/><Button Content="Відновити стандартні" Command="{Binding ResetCommand}"/></StackPanel><TextBlock Text="{Binding Message}" TextWrapping="Wrap"/>
+    </StackPanel></ScrollViewer></TabItem>
+  </TabControl>
+</Grid></Window>

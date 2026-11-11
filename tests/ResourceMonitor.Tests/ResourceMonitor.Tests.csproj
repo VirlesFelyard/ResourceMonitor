@@ -4,6 +4,7 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="../../src/ResourceMonitor.Desktop/ResourceMonitor.Desktop.csproj" />
     <ProjectReference Include="../../src/ResourceMonitor.Core/ResourceMonitor.Core.csproj" />
     <ProjectReference Include="../../src/ResourceMonitor.Application/ResourceMonitor.Application.csproj" />
     <ProjectReference Include="../../src/ResourceMonitor.Infrastructure/ResourceMonitor.Infrastructure.csproj" />

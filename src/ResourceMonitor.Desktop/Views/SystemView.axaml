@@ -1,0 +1,83 @@
+<UserControl xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:controls="using:ResourceMonitor.Desktop.Controls" x:Class="ResourceMonitor.Desktop.Views.SystemView">
+  <UserControl.Styles>
+    <Style Selector="Border.systemCard"><Setter Property="Background" Value="{DynamicResource CardBackground}"/><Setter Property="BorderBrush" Value="{DynamicResource CardBorder}"/><Setter Property="BorderThickness" Value="1"/><Setter Property="CornerRadius" Value="14"/><Setter Property="Padding" Value="20"/></Style>
+    <Style Selector="TextBlock.sectionTitle"><Setter Property="FontSize" Value="16"/><Setter Property="FontWeight" Value="SemiBold"/></Style>
+    <Style Selector="TextBlock.systemValue"><Setter Property="FontSize" Value="19"/><Setter Property="FontWeight" Value="SemiBold"/><Setter Property="TextWrapping" Value="Wrap"/></Style>
+    <Style Selector="ProgressBar"><Setter Property="Height" Value="7"/><Setter Property="Foreground" Value="#648DBF"/><Setter Property="Maximum" Value="100"/></Style>
+  </UserControl.Styles>
+  <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+    <StackPanel Margin="18,16,18,20" Spacing="12">
+      <TextBlock Text="{Binding StaticNotice}" IsVisible="{Binding HasStaticNotice}" Classes="muted" TextWrapping="Wrap"/>
+      <controls:ResponsiveColumns MinimumColumnWidth="350">
+        <Border Classes="systemCard">
+          <StackPanel Spacing="12">
+            <StackPanel Orientation="Horizontal" Spacing="10"><Viewbox Width="16" Height="16"><Path Width="26" Height="26" Stroke="{DynamicResource SystemControlForegroundBaseHighBrush}" Opacity="0.7" StrokeThickness="1.5" Data="{StaticResource OsIconGeometry}"/></Viewbox><TextBlock Classes="sectionTitle" Text="Операційна система"/></StackPanel>
+            <TextBlock Classes="systemValue" Text="{Binding OsName}"/>
+            <TextBlock Classes="muted" Text="{Binding Machine}" TextWrapping="Wrap"/>
+            <Border Height="1" Background="{DynamicResource CardBorder}" Margin="0,4"/>
+            <TextBlock Classes="muted" Text="Час роботи"/>
+            <TextBlock FontSize="16" FontWeight="SemiBold" Text="{Binding Uptime}" TextWrapping="Wrap"/>
+          </StackPanel>
+        </Border>
+        <Border Classes="systemCard">
+          <StackPanel Spacing="12">
+            <StackPanel Orientation="Horizontal" Spacing="10"><Viewbox Width="16" Height="16"><Path Width="26" Height="26" Stroke="{DynamicResource SystemControlForegroundBaseHighBrush}" Opacity="0.7" StrokeThickness="1.5" Data="{StaticResource CpuIconGeometry}"/></Viewbox><TextBlock Classes="sectionTitle" Text="Процесор"/></StackPanel>
+            <TextBlock FontSize="17" Text="{Binding CpuModel}" TextWrapping="Wrap"/>
+            <TextBlock Classes="muted" Text="{Binding CpuVendor}" TextWrapping="Wrap"/>
+            <Border Height="1" Background="{DynamicResource CardBorder}" Margin="0,4"/>
+            <Grid ColumnDefinitions="*,*,1.5*">
+              <StackPanel Spacing="6" Margin="0,0,8,0"><TextBlock Classes="muted" Text="Ядра"/><TextBlock FontSize="16" FontWeight="SemiBold" Text="{Binding PhysicalCores}" TextWrapping="Wrap"/></StackPanel>
+              <StackPanel Grid.Column="1" Spacing="6" Margin="0,0,8,0"><TextBlock Classes="muted" Text="Потоки"/><TextBlock FontSize="16" FontWeight="SemiBold" Text="{Binding LogicalCores}" TextWrapping="Wrap"/></StackPanel>
+              <StackPanel Grid.Column="2" Spacing="6"><TextBlock Classes="muted" Text="Частота при запуску" TextWrapping="Wrap"/><TextBlock FontSize="16" FontWeight="SemiBold" Text="{Binding Frequency}" TextWrapping="Wrap"/></StackPanel>
+            </Grid>
+          </StackPanel>
+        </Border>
+        <Border Classes="systemCard">
+          <StackPanel Spacing="12">
+            <StackPanel Orientation="Horizontal" Spacing="10"><Viewbox Width="16" Height="16"><Path Width="26" Height="26" Stroke="{DynamicResource SystemControlForegroundBaseHighBrush}" Opacity="0.7" StrokeThickness="1.5" Data="{StaticResource MemoryIconGeometry}"/></Viewbox><TextBlock Classes="sectionTitle" Text="Оперативна пам’ять"/></StackPanel>
+            <Grid ColumnDefinitions="*,Auto">
+              <StackPanel Spacing="4"><TextBlock Classes="systemValue" Text="{Binding MemoryUsed}"/><TextBlock Classes="muted" Text="{Binding MemoryTotal}"/></StackPanel>
+              <TextBlock Grid.Column="1" Margin="12,0,0,0" FontSize="17" VerticalAlignment="Center" Text="{Binding MemoryPercent}"/>
+            </Grid>
+            <ProgressBar Value="{Binding MemoryUsage}" IsVisible="{Binding HasMemory}"/>
+            <TextBlock Classes="muted" Text="{Binding MemoryAvailable}" TextWrapping="Wrap"/>
+            <TextBlock Classes="muted" Text="{Binding Swap}" TextWrapping="Wrap"/>
+          </StackPanel>
+        </Border>
+        <Border Classes="systemCard">
+          <StackPanel Spacing="14">
+            <StackPanel Orientation="Horizontal" Spacing="10"><Viewbox Width="16" Height="16"><Path Width="26" Height="26" Stroke="{DynamicResource SystemControlForegroundBaseHighBrush}" Opacity="0.7" StrokeThickness="1.5" Data="{StaticResource DiskIconGeometry}"/></Viewbox><TextBlock Classes="sectionTitle" Text="Накопичувачі"/></StackPanel>
+            <TextBlock Classes="muted" Text="{Binding VolumesMessage}" IsVisible="{Binding HasVolumesMessage}" TextWrapping="Wrap"/>
+            <ItemsControl ItemsSource="{Binding Volumes}">
+              <ItemsControl.ItemTemplate><DataTemplate>
+                <StackPanel Spacing="7" Margin="0,0,0,14">
+                  <Grid ColumnDefinitions="*,Auto"><TextBlock FontSize="15" FontWeight="SemiBold" Text="{Binding Name}" TextWrapping="Wrap"/><TextBlock Grid.Column="1" Classes="muted" Margin="12,0,0,0" VerticalAlignment="Center" Text="{Binding PercentText}"/></Grid>
+                  <ProgressBar Value="{Binding Percent}" IsVisible="{Binding HasCapacity}"/>
+                  <TextBlock Classes="muted" Text="{Binding Capacity}" TextWrapping="Wrap"/>
+                </StackPanel>
+              </DataTemplate></ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+        </Border>
+      </controls:ResponsiveColumns>
+      <Border Classes="systemCard">
+        <StackPanel Spacing="16">
+          <StackPanel Orientation="Horizontal" Spacing="10"><Viewbox Width="16" Height="16"><Path Width="26" Height="26" Stroke="{DynamicResource SystemControlForegroundBaseHighBrush}" Opacity="0.7" StrokeThickness="1.5" Data="{StaticResource NetworkIconGeometry}"/></Viewbox><TextBlock Classes="sectionTitle" Text="Мережеві інтерфейси"/></StackPanel>
+          <TextBlock Classes="muted" Text="{Binding NetworkMessage}" IsVisible="{Binding HasNetworkMessage}" TextWrapping="Wrap"/>
+          <ItemsControl ItemsSource="{Binding Networks}">
+            <ItemsControl.ItemsPanel><ItemsPanelTemplate><controls:ResponsiveColumns MinimumColumnWidth="300"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate><DataTemplate>
+              <Border BorderThickness="1" BorderBrush="{DynamicResource CardBorder}" CornerRadius="9" Padding="12">
+                <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                  <TextBlock Text="{Binding Name}" FontWeight="Medium" TextWrapping="Wrap"/>
+                  <TextBlock Grid.Column="1" Text="{Binding Indicator}" Foreground="{Binding Color}" Margin="12,0,0,0" ToolTip.Tip="{Binding State}"/>
+                  <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Details}" Classes="muted" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                </Grid>
+              </Border>
+            </DataTemplate></ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </StackPanel>
+      </Border>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

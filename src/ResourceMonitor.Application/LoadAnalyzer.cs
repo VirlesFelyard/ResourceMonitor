@@ -25,10 +25,10 @@ public sealed class LoadAnalyzer
             if (!pending.ContainsKey(kind)) { pending[kind] = baseline; continue; }
             pending.Remove(kind); lastEvents[kind] = sample.Time;
             var candidates = RankCandidates(kind, baseline.Processes, processes, baseline.Sample.Time);
-            var unit = kind == EventKind.Cpu ? "в. п." : "MiB"; var divisor = kind == EventKind.Cpu ? 1d : 1024 * 1024;
+            var unit = kind == EventKind.Cpu ? "%" : "MiB"; var growthUnit = kind == EventKind.Cpu ? "в. п." : unit; var divisor = kind == EventKind.Cpu ? 1d : 1024 * 1024;
             var change = current.Value - before.Value;
-            var description = $"{(kind == EventKind.Cpu ? "CPU" : "RAM")}: {before / divisor:F1} → {current / divisor:F1} {unit} (+{change / divisor:F1}). ";
-            description += candidates.Count == 0 ? "Недостатньо даних для визначення процесів-кандидатів." : string.Join("; ", candidates.Select(c => $"{c.Name} ({c.Pid}): {(c.CurrentLeader ? "поточний лідер " : "+")}{c.Change / divisor:F1} {unit}")) + ".";
+            var description = $"{(kind == EventKind.Cpu ? "CPU" : "RAM")}: {before / divisor:F1} → {current / divisor:F1} {unit} (+{change / divisor:F1} {growthUnit}). ";
+            description += candidates.Count == 0 ? "Недостатньо даних для визначення процесів-кандидатів." : string.Join("; ", candidates.Select(c => $"{c.Name} ({c.Pid}): {(c.CurrentLeader ? "поточний лідер " : "+")}{c.Change / divisor:F1} {(c.CurrentLeader ? unit : growthUnit)}")) + ".";
             var severity = (kind == EventKind.Cpu ? current >= 90 : sample.Memory?.Percent >= 90) ? EventSeverity.Critical : EventSeverity.Warning;
             events.Add(new(Guid.NewGuid(), sample.Time, kind, before.Value, current.Value, change, severity, description, candidates));
         }

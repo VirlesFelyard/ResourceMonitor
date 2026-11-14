@@ -23,7 +23,7 @@ public partial class App : Avalonia.Application
             collection.AddSingleton<LoadAnalyzer>(); collection.AddSingleton<MonitorService>(); collection.AddSingleton<SettingsViewModel>(); collection.AddSingleton<MainViewModel>();
             services = collection.BuildServiceProvider();
             var vm = services.GetRequiredService<MainViewModel>(); var window = new MainWindow { DataContext = vm }; desktop.MainWindow = window;
-            window.Opened += async (_, _) => { await vm.InitializeAsync(); };
+            window.Opened += async (_, _) => { await vm.InitializeAsync(); if (desktop.Args?.Contains("--ui-smoke-test") == true) await UiSmokeTest.RunAsync(window, vm); };
             var closing = false; var stopped = false;
             window.Closing += async (_, e) =>
             {

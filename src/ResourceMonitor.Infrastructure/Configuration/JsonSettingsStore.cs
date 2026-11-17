@@ -6,7 +6,7 @@ public sealed class JsonSettingsStore : ISettingsStore
 {
     private readonly string path;
     public string? LastError { get; private set; }
-    public JsonSettingsStore(string? path = null) => this.path = path ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ResourceMonitor", "settings.json");
+    public JsonSettingsStore(string? path = null) => this.path = Path.GetFullPath(path ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ResourceMonitor", "settings.json"));
     public MonitorSettings Load()
     {
         try { if (!File.Exists(path)) return new(); var settings = JsonSerializer.Deserialize<MonitorSettings>(File.ReadAllText(path)) ?? new(); settings.Validate(); return settings; }

@@ -9,6 +9,7 @@ public sealed class JsonSettingsStore : ISettingsStore
     public JsonSettingsStore(string? path = null) => this.path = Path.GetFullPath(path ?? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ResourceMonitor", "settings.json"));
     public MonitorSettings Load()
     {
+        LastError = null;
         try { if (!File.Exists(path)) return new(); var settings = JsonSerializer.Deserialize<MonitorSettings>(File.ReadAllText(path)) ?? new(); settings.Validate(); return settings; }
         catch (Exception e) when (e is IOException or UnauthorizedAccessException or JsonException or ArgumentException) { LastError = $"Налаштування відновлено до стандартних: {e.Message}"; return new(); }
     }
